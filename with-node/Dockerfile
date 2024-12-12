@@ -1,7 +1,20 @@
+ARG NODE_VERSION=18.16.0
+ARG ALPINE_VERSION=3.17.2
+
+FROM node:${NODE_VERSION}-alpine AS node
+
 FROM ghcr.io/dnhuan/alpine-chrome
 
+COPY --from=node /usr/lib /usr/lib
+COPY --from=node /usr/local/lib /usr/local/lib
+COPY --from=node /usr/local/include /usr/local/include
+COPY --from=node /usr/local/bin /usr/local/bin
+
+RUN node -v
+
 USER root
-RUN apk add --no-cache \
-      tini make gcc g++ python3 git nodejs npm yarn
+RUN npm install -g yarn --force
+RUN yarn -v
+
 USER chrome
 ENTRYPOINT ["tini", "--"]
