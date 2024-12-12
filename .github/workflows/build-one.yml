@@ -38,7 +38,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_REPOSITORY }}
+          images: ${{ env.REGISTRY }}/dnhuan/${{ env.IMAGE_REPOSITORY }}
           tags: type=raw,value=${{ inputs.tag }}
           labels: |
             org.opencontainers.image.documentation=https://github.com/dnhuan/alpine-chrome/blob/master/README
@@ -139,10 +139,6 @@ jobs:
           platforms: linux/amd64,linux/arm64,linux/arm/v7
           labels: ${{ steps.meta.outputs.labels }}
           tags: |
-            dnhuan/${{ env.IMAGE_NAME }}
-            dnhuan/${{ env.IMAGE_VERSIONED_NAME }}
             ghcr.io/dnhuan/${{ env.IMAGE_NAME }}
             ghcr.io/dnhuan/${{ env.IMAGE_VERSIONED_NAME }}
           push: true
-          cache-from: type=gha
-          cache-to: type=gha
