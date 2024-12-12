@@ -1,6 +1,4 @@
-ARG NODE_VERSION=18.16.0
-ARG ALPINE_VERSION=3.17.2
-
+ARG NODE_VERSION=18.20.5
 FROM node:${NODE_VERSION}-alpine AS node
 
 FROM ghcr.io/dnhuan/alpine-chrome
